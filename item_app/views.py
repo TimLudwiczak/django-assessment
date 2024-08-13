@@ -3,10 +3,11 @@ from rest_framework.views import APIView
 
 # Create your views here.
 class All_items(APIView):
-    pass
+    def get(self, request):
+
 
 class An_item(APIView):
-    pass
+    def get(self, request):
+
 
 class Item_by_category(APIView):
-    pass

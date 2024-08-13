@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),  # URL for the Django admin panel
     path('items/', include('item_app.urls')),  # Include URLs from item_app
     path('users/', include('user_app.urls')),  # Include URLs from user_app
+    path('cart/', include())
 ]
 
