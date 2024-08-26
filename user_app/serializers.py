@@ -1,18 +1,16 @@
 from rest_framework import serializers
-from .models import Client
+from django.contrib.auth.models import User  # Or use your custom User model
+from .models import Profile  # Assuming you have a Profile model
 
-class ClientSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Client
-        fields = ['email', 'password']
-        extra_kwargs = {'password': {'write_only': True}}
+        model = User
+        fields = ['id', 'username', 'email']
 
-    def create(self, validated_data):
-        # Custom behavior: hash the password before saving
-        user = Client.objects.create_user(
-            email=validated_data['email'],
-            password=validated_data['password']
-        )
-        user.set_password(validated_data['password'])
-        user.save()
-        return user
+class ProfileSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model = Profile
+        fields = ['user', 'bio', 'avatar']  # Add other profile fields as needed
+
