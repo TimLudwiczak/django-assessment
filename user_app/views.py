@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate
-from .serializers import ClientSerializer
+from .serializers import UserSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token 
@@ -11,7 +11,7 @@ from rest_framework.status import ( HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_C
 # Create your views here.
 class Sign_Up(APIView):
     def post(self, request):
-        serializer = ClientSerializer(data=request.data)
+        serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
             token, created = Token.objects.get_or_create(user=user)
